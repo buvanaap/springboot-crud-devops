@@ -1,0 +1,23 @@
+name: Spring-Petclinic-CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  permissions:
+    contents: read
+  jobs:
+    build-and-test:
+      name: Build and Test
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout source code
+          uses: actions/checkout@v4
+          with:
+            distribution: temurin
+            java-version: '17'
+            cache: maven
+        - name: Build and run tests
+          run: mvn -B clean verify
