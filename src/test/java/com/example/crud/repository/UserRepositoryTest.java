@@ -1,5 +1,5 @@
 package com.example.crud.repository;
-
+import org.springframework.test.context.ActiveProfiles;
 import com.example.crud.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@ActiveProfiles("test")
 @DataJpaTest
 class UserRepositoryTest {
 
