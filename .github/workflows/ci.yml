@@ -29,4 +29,11 @@ jobs:
 
       - name: Build and run tests
         run: mvn -B clean verify
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact
+        with:
+          name: springboot-crud-jar
+          path: target/*.jar
+          if-no-files-found: error
+          retention-days: 7
 
