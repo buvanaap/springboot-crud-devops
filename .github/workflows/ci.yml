@@ -1,4 +1,6 @@
-name: Spring-Petclinic-CI
+
+name: Spring-Boot-CRUD-CI
+
 on:
   push:
     branches:
@@ -6,8 +8,10 @@ on:
   pull_request:
     branches:
       - main
+
 permissions:
   contents: read
+
 jobs:
   build-and-test:
     name: Build and Test
@@ -15,11 +19,14 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-      - name: Setup Java 
+
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
           cache: maven
+
       - name: Build and run tests
-         run: mvn -B clean verify
+        run: mvn -B clean verify
+
