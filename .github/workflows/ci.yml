@@ -49,5 +49,16 @@ jobs:
         with:
           name: springboot-crud-jar
           path: target/
+      - name: Login Docker
+        uses: docker/login-actions@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Docker Image
-        run: docker build -t springboot-crud:ci .
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: docker build -t "$DOCKERHUB_USERNAME/springboot-crud:latest" .
+      - name: Push Docker Image
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: docker push "$DOCKERHUB_USERNAME/springboot-crud:latest" 
