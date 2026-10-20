@@ -37,3 +37,17 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: springboot-crud-jar
+          path: target/
+      - name: Build Docker Image
+        run: docker build -t springboot-crud:ci .
